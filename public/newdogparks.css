@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  border: 3px solid rgb(218, 209, 209);
+  border-radius: 10px;
+  
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.field {
+  text-align: center;
+}
+
+label {
+  display: inline-block;
+  text-align: right;
+  width: 80px;
+}
+
+input[type=text] {
+  padding: 5px 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+}
+
+.submit {
+  background-color:rgb(12, 179, 54);
+  color: white;
+  font-size: 15px;
+  padding: 5px 115px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #000000;
+  margin: 10px;
+  margin-bottom: 25px;
+}

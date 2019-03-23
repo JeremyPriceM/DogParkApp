@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Dog Park App</title>
+    <link href="newdogparks.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <form action="./dogparks.html" method="POST" class="formClass">
+          <h1 class="formTitle">New Dog Park</h1>
+
+          <div class="field">
+            <label>Park Name</label>
+            <input type="text" name="dogPark[parkName]" placeholder="East Hill Dog Park"><br />
+
+            <label>City</label>
+            <input type="text" name="dogPark[parkCity]" placeholder="Pensacola"><br />
+
+            <label>State</label>
+            <input type="text" name="dogPark[parkState]" placeholder="Florida"><br />
+
+            <label>Image URL</label>
+            <input type="text" name="dogPark[image]" placeholder="Image URL"><br />
+    
+            <input type="submit" class="submit" value="Submit">
+          </div>
+        </form>
+      </div>
+    </main>
+    <script src="index.js"></script>
+  </body>
+</html>

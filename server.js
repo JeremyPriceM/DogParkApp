@@ -1,7 +1,32 @@
 const express = require('express');
 const app = express();
-app.use(express.static('public'));
+const path = require('path');
+app.use(express.static(__dirname + '/public'));
 
+
+app.get("/", (req, res) => {
+  res.sendFile('index.html');
+});
+
+app.get("/dogparks", (req, res) => {
+    res.sendFile(__dirname + '/public/dogparks.html');
+});
+
+app.post("/dogparks", (req, res) => {
+    res.send("You Have Hit The Post Route");
+});
+
+app.get("/newdogparks", (req, res) => {
+    res.sendFile(__dirname + '/public/newdogparks.html');
+});
+
+app.get("/dogparks/:id", (req, res) => {
+    res.send("You have reached the /dogparks/ID route");
+});
+
+app.delete("/dogparks/:id",(req, res) => {
+
+});
 
 
 let server;

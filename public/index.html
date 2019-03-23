@@ -1,1 +1,42 @@
-<h1>"hello World"</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Dog Park App</title>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <ul>
+          <li class="home"><a href="">The Dog Park</a></li>
+          <li><a href="">Login</a></li>
+          <li><a href="">Sign Up</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <header class="title">
+      <h1>The Dog Park App</h1>
+    </header>
+    <section class="tagLine" id="tagLine">
+      <h2>Find the dog park that's right for you and your dog</h2>
+      <form action="./dogparks.html">
+        <input role="button" type="submit" id="letsGo" value="Visit Dog Parks"/>
+      </form>
+    </section>
+    <section class="logIn">
+      <form action="" method="post" class="hidden" id="userPass"  >
+        <label for="username">Username:</label>
+        <input type="text" name="username"><br />
+        
+        <label for="password">Password:</label>
+        <input type="text" name="password"><br />
+
+        <input type="submit" id="logIn" value="Log In">
+      </form>
+    </section>
+    <script src="index.js"></script>
+  </body>
+</html>

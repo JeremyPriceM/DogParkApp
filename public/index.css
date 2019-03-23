@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+html {
+  background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(http://p1cdn4static.civiclive.com/UserFiles/Servers/Server_9496362/Image/Parks%20and%20Recreation/Public%20Parks/Hatfield%20Dog%20Park/Dog%20Park%20Small.jpg);
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+.title {
+  color: white;
+  text-align: center;
+  margin-top: 75px;
+}
+.tagLine, .logIn {
+  color: white;
+  text-align: center;
+  margin-top: 25%;
+}
+h1 {
+  font-size: 100px;
+  margin-top: 5%;
+}
+h2 {
+  font-size: 50px;
+}
+#letsGo, #logIn, #signUp {
+  background-color:rgb(5, 124, 79);
+  color: white;
+  font-size: 20px;
+  padding: 16px 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #000000;
+  margin: 0 auto;
+  font-weight: bold;
+}
+#letsGo:hover, #logIn:hover, #signUp:hover {
+  background-color: rgb(4, 168, 245);
+}
+.hidden {
+  display: none;
+}
+.logIn {
+  font-size: 25px;
+}
+label {
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+}
+#logIn {
+  margin-top: 25px;
+}
+input[type=text] {
+  padding: 5px 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+}
+.nav {
+  width: 100%;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(5, 124, 79);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 2px 2px 4px #000000;
+}
+li {
+  float: right;
+}
+li a {
+  display: block;
+  text-decoration: none;
+  padding: 14px 16px;
+  color: white;
+  text-align: center;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.home {
+  float: left;
+  
+}
+li a:hover {
+  background-color: rgb(4, 168, 245);
+}
