@@ -5,7 +5,7 @@ body {
   margin: 0;
 }
 html {
-  /* background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(http://p1cdn4static.civiclive.com/UserFiles/Servers/Server_9496362/Image/Parks%20and%20Recreation/Public%20Parks/Hatfield%20Dog%20Park/Dog%20Park%20Small.jpg); */
+  background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url(http://p1cdn4static.civiclive.com/UserFiles/Servers/Server_9496362/Image/Parks%20and%20Recreation/Public%20Parks/Hatfield%20Dog%20Park/Dog%20Park%20Small.jpg);
   height: 100%;
   background-repeat: no-repeat;
   background-position: center;
