@@ -1,65 +1,63 @@
+'use strict';
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const path = require('path');
-app.use(express.static(__dirname + '/public'));
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+
+const {PORT, DATABASE_URL} = require('./config');
+const routes = require('./api/router-dogparks');
 
 
-app.get("/", (req, res) => {
-  res.sendFile('index.html');
+//initialize routes
+app.use(routes);
+
+//error handling middleware
+app.use(function(err, req, res, next) {
+    res.status(422).send({error: err.message});
 });
-
-app.get("/dogparks", (req, res) => {
-    res.sendFile(__dirname + '/public/dogparks.html');
-});
-
-app.post("/dogparks", (req, res) => {
-    res.send("You Have Hit The Post Route");
-});
-
-app.get("/newdogparks", (req, res) => {
-    res.sendFile(__dirname + '/public/newdogparks.html');
-});
-
-app.get("/dogparks/:id", (req, res) => {
-    res.send("You have reached the /dogparks/ID route");
-});
-
-app.delete("/dogparks/:id",(req, res) => {
-
-});
-
 
 let server;
 
-function runServer() {
-    const port = process.env.PORT || 8080;
+function runServer(databaseUrl, port=PORT) {
     return new Promise((resolve, reject) => {
-    server = app
-        .listen(port, () => {
-            console.log(`Your app is listening on port ${port}`);
-            resolve(server);
-        })
-        .on("error", err => {
-            reject(err);
+        mongoose.connect(databaseUrl, err => {
+            if (err) {
+                return reject(err);
+            }
+            server = app
+                .listen(port, () => {
+                    console.log(`Your app is listening on port ${port}`);
+                    resolve();
+            })
+            .on("error", err => {
+                mongoose.disconnect();
+                reject(err);
+            });
         });
     });
 }
 
 function closeServer() {
-    return new Promise((resolve, reject) => {
-        console.log("closing server");
-        server.close(err => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve();
+    return mongoose.disconnect().then(() => {
+        return new Promise((resolve, reject) => {
+            console.log("closing server");
+            server.close(err => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve();
+            });
         });
     });
 }
 
 if (require.main === module) {
-    runServer().catch(err => console.error(err));
+    runServer(DATABASE_URL).catch(err => console.error(err));
 }
 
 module.exports = { app, runServer, closeServer };

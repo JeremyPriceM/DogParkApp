@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Dog Park App</title>
-    <link href="newdogparks.css" rel="stylesheet" type="text/css" />
+    <link href="signup.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <header>
@@ -18,21 +18,15 @@
     </header>
     <main>
       <div class="container">
-        <form  method="post" action="/dogparks"  class="formClass" id="dogparksForm">
-          <h1 class="formTitle">New Dog Park</h1>
+        <form  method="post" action="/signup"  class="formClass" id="signupForm">
+          <h1 class="formTitle">Sign Up</h1>
 
           <div class="field">
-            <label>Park Name</label>
-            <input type="text" name="parkName" placeholder="East Hill Dog Park"><br />
+            <label>User Name</label>
+            <input type="text" name="userName" id="userName" placeholder=""><br />
 
-            <label>City</label>
-            <input type="text" name="parkCity" placeholder="Pensacola"><br />
-
-            <label>State</label>
-            <input type="text" name="parkState" placeholder="Florida"><br />
-
-            <label>Image URL</label>
-            <input type="text" name="parkImage" placeholder="Image URL"><br />
+            <label>Password</label>
+            <input type="text" name="userPassword" placeholder=""><br />
     
             <input type="submit" class="submit" value="Submit">
           </div>
@@ -41,6 +35,6 @@
       <div id="error-message"></div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="newdogparks.js"></script>
+    <script src="signup.js"></script>
   </body>
 </html>
