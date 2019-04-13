@@ -18,7 +18,6 @@ router.get('/dogparks', (req, res, next) => {
     Dogparks.find({})
     .then(function(dogparks) {
         res.send(dogparks);
-        //console.log(dogparks);
     })
 });
 
@@ -35,51 +34,25 @@ router.get("/newdogparks", (req, res) => {
 });
 
 router.get("/dogparks/:id", jsonParser, (req, res, next) => {
-    //let DDP = req.params.id;
     Dogparks.findById(req.params.id)
     .then(console.log(req.params.id))
-    .then (res.redirect('/dogparkID.html'), {id:req.params.id})
-    // .then(function(dogpark) {
-    //      res.sendFile('/dogparks.html');
-    //  })
-
-    
-    // Dogparks.findById(req.params.id, function(err, dogpark) {
-    //     if(err){
-    //         console.log(err);
-    //     } else {
-    //         res.sendFile("/public/dogparkID.html")
-    //     }
-    // });
-
-    
-
-    //.then(dogpark => res.json(dogpark.serialize()))
-    //.then(res.redirect('/dogparkID.html'))
-    // .catch(err => {
-    //     console.log(err);
-    //     res.status(500).json({error: "Something went Awry"});
-    // });
+    .then(function(dogpark) {
+        res.send(dogpark)
+    })
 });
 
 router.put('/dogparks/:id', (req, res, next) => {
     Dogparks.findByIdAndUpdate({_id: req.params.id}, req.body)
     .then(function() {
-        Dogparks.findOne({_id: req.params.id})
-        .then(function(dogpark) {
-            res.send(dogpark);
-        });
+            res.redirect('/dogparks.html');
     });
 });
 
 router.delete("/dogparks/:id",(req, res, next) => {
-    Dogparks.findByIdAndRemove({_id: req.params.id})
-    .then(function(dogpark) {
-        res.send(dogpark);
+    Dogparks.findByIdAndDelete({_id: req.params.id})
+    .then(function() {
+        res.redirect('/dogparks.html');
     });
 });
-
-
-
 
  module.exports = router;

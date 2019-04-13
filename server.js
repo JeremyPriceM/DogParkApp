@@ -1,8 +1,10 @@
 'use strict';
 require('dotenv').config();
 const express = require('express');
+var methodOverride = require('method-override');
 const app = express();
 const bodyParser = require('body-parser');
+app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -11,7 +13,6 @@ mongoose.Promise = global.Promise;
 
 const {PORT, DATABASE_URL} = require('./config');
 const routes = require('./api/router-dogparks');
-
 
 //initialize routes
 app.use(routes);
