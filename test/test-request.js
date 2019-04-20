@@ -8,7 +8,7 @@ const { closeServer, runServer, app} = require('../server');
 const expect = chai.expect;
 chai.use(chaiHttp);
 
-describe('blog posts API', function () {
+describe('DogPark API', function () {
     before(function () {
         return runServer();
     });
@@ -18,7 +18,7 @@ describe('blog posts API', function () {
 
 
     describe('GET endpoint', function () {
-        it('should return home index.html', function () {
+        it('should return index.html', function () {
             return chai.request(app)
             .get('/')
             .then(function(res) {

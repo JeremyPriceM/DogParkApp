@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise;
 
 
 const dogparksSchema = mongoose.Schema({
-    userName: 'String',
+    username: 'String',
     parkName: 'String',
     parkImage: 'String',
     parkCity: 'String',
@@ -14,7 +14,7 @@ const dogparksSchema = mongoose.Schema({
 
 dogparksSchema.methods.serialize = function() {
     return {
-        userName: this.userName,
+        username: this.userName,
         parkName: this.parkName,
         parkImage: this.parkImage,
         parkCity: this.parkCity,
