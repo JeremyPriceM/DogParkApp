@@ -33,11 +33,27 @@ function displayResults(responseJson) {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
+
 function GetID() {
     $('main').on('click', '.more-Info', function (event){
+        //console.log(document.cookie.authToken);
         event.preventDefault();
         var id = $(this).attr('id');
-        fetch(searchURL + '/' + id)
+        window.getCookie = function(name) {
+            var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            if (match) return match[2];
+          }
+        const authToken = window.getCookie('authToken');
+        //console.log(authToken);
+        //console.log(id);
+        fetch(searchURL + '/' + id, {
+            method: "GET",
+            credentials: 'include',
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': authToken
+            }
+        })
         .then(response => {
             if (response.ok) {
                 return response.json();

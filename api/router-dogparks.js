@@ -9,9 +9,11 @@ router.use(express.static('public'));
 const jwt = require('jsonwebtoken');
 const {localStrategy, jwtStrategy} = require('./strategies')
 const config = require('../config');
-
+const {setCookie, getCookie, eraseCookie} = require('./helper');
 const passport = require('passport');
 const {User} = require('../models/users');
+const {checkToken} = require('./middleware.js');
+
 
 const createAuthToken = function(user) {
     return jwt.sign({user}, config.JWT_SECRET, {
@@ -35,9 +37,21 @@ router.get('/login', (req,res) => {
 router.post('/login', localAuth, (req, res) => {
     const authToken = createAuthToken(req.user.serialize());
     //res.json({authToken});
-    console.log(authToken);
-    console.log(req.user);
+    //console.log(authToken);
+    //document.cookie = "authToken=authToken
+    //document.cookie =  "authToken=" + authToken
+    //setCookie('authToken', authToken);
+    //res.cookie(authToken);
+    //console.log(req.user);
+    res.cookie('authToken', authToken);
     res.redirect("/dogparks.html");
+});
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.clearCookie('authToken');
+    res.redirect('index.html');
+    //res.redirect('index.html');
 });
 
 // The user exchanges a valid JWT for a new one with a later expiration
@@ -55,6 +69,7 @@ router.get('/', (req, res, next) => {
 
 //get list of dogparks from DB
 router.get('/dogparks', (req, res, next) => {
+    //console.log(req.cookie);
     Dogparks.find({})
     .then(function(dogparks) {
         res.send(dogparks);
@@ -73,7 +88,9 @@ router.get("/newdogparks", (req, res) => {
     res.sendFile('/public/newdogparks.html');
 });
 
-router.get("/dogparks/:id", jwtAuth, jsonParser, (req, res, next) => {
+router.get("/dogparks/:id", jsonParser, checkToken, (req, res, next) => {
+    //console.log(req.cookie);
+    //console.log(req.headers['authorization']);
     Dogparks.findById(req.params.id)
     .then(function(dogpark) {
         res.send(dogpark)

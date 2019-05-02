@@ -4,6 +4,8 @@ const express = require('express');
 var methodOverride = require('method-override');
 const app = express();
 const bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

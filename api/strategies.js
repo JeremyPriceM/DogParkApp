@@ -14,6 +14,7 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
     .then(_user => {
       user = _user;
       if (!user) {
+        console.log("NO");
         // Return a rejected promise so we break out of the chain of .thens.
         // Any errors like this will be handled in the catch block.
         return Promise.reject({
