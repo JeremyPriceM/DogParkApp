@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 
 describe('DogPark API', function () {
     before(function () {
-        return runServer(TEST_DATABASE_URL);
+        return runServer();
     });
     after(function () {
         return closeServer();
