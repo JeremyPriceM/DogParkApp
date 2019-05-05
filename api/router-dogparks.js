@@ -9,7 +9,6 @@ router.use(express.static('public'));
 const jwt = require('jsonwebtoken');
 const {localStrategy, jwtStrategy} = require('./strategies')
 const config = require('../config');
-const {setCookie, getCookie, eraseCookie} = require('./helper');
 const passport = require('passport');
 const {User} = require('../models/users');
 const {checkToken} = require('./middleware.js');
@@ -29,20 +28,14 @@ passport.use(jwtStrategy);
 const localAuth = passport.authenticate('local', {session: false});
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
-//////////////Auth Routes/////////////////////////////////////////
+
+////////////// AUTH ROUTES /////////////////////////////////////////
 router.get('/login', (req,res) => {
     res.sendFile('/public/login.html');
 });
 
 router.post('/login', localAuth, (req, res) => {
     const authToken = createAuthToken(req.user.serialize());
-    //res.json({authToken});
-    //console.log(authToken);
-    //document.cookie = "authToken=authToken
-    //document.cookie =  "authToken=" + authToken
-    //setCookie('authToken', authToken);
-    //res.cookie(authToken);
-    //console.log(req.user);
     res.cookie('authToken', authToken);
     res.redirect("/dogparks.html");
 });
@@ -51,7 +44,6 @@ router.get('/logout', (req, res) => {
     req.logout();
     res.clearCookie('authToken');
     res.redirect('index.html');
-    //res.redirect('index.html');
 });
 
 // The user exchanges a valid JWT for a new one with a later expiration
@@ -60,7 +52,7 @@ router.post('/refresh', jwtAuth, (req, res) => {
     res.json({authToken});
 });
 
-///////////////DogPark Routed///////////////////////////////////
+/////////////// DOGPARK ROUTES ///////////////////////////////////
 
 router.get('/', (req, res, next) => {
     res.sendFile('index.html');
@@ -69,7 +61,6 @@ router.get('/', (req, res, next) => {
 
 //get list of dogparks from DB
 router.get('/dogparks', (req, res, next) => {
-    //console.log(req.cookie);
     Dogparks.find({})
     .then(function(dogparks) {
         res.send(dogparks);
@@ -77,6 +68,7 @@ router.get('/dogparks', (req, res, next) => {
 });
 
 router.post("/dogparks", jsonParser, (req, res, next) => {
+    console.log(req);
     Dogparks.create(req.body)
     .then(function(dogpark){
         res.redirect('/dogparks.html');
@@ -89,29 +81,27 @@ router.get("/newdogparks", (req, res) => {
 });
 
 router.get("/dogparks/:id", jsonParser, checkToken, (req, res, next) => {
-    //console.log(req.cookie);
-    //console.log(req.headers['authorization']);
     Dogparks.findById(req.params.id)
     .then(function(dogpark) {
         res.send(dogpark)
     })
 });
 
-router.put('/dogparks/:id', (req, res, next) => {
+router.put('/dogparks/:id', checkToken, (req, res, next) => {
     Dogparks.findByIdAndUpdate({_id: req.params.id}, req.body)
     .then(function() {
             res.redirect('/dogparks.html');
     });
 });
 
-router.delete("/dogparks/:id", (req, res, next) => {
+router.delete("/dogparks/:id", checkToken, (req, res, next) => {
     Dogparks.findByIdAndDelete({_id: req.params.id})
     .then(function() {
         res.redirect('/dogparks.html');
     });
 });
 
-//////////Users Routes /////////////////////////
+////////// USER ROUTES /////////////////////////
 
 router.get('/signup', (req, res) => {
     res.sendFile('/public/signup.html');

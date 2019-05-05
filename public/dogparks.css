@@ -176,3 +176,6 @@ padding-top: 30px;
     margin-bottom: 25px;
   }
   
+  .hidden {
+      display: none;
+  }

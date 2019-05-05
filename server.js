@@ -17,23 +17,6 @@ const {PORT, DATABASE_URL} = require('./config');
 const routes = require('./api/router-dogparks');
 
 
-
-
-//const {router: routes} = require('./api/router-dogparks');
-// const { router: usersRouter } = require('./api/users');
-// const { router: authRouter} = require('./api/auth');
-
-// app.use('/api/users/', usersRouter);
-// app.use('/api/auth/', authRouter);
-
-//const jwtAuth = passport.authenticate('jwt', { session: false });
-
-// app.get('/api/protected', jwtAuth, (req, res) => {
-//     return res.json({
-//       data: 'rosebud'
-//     });
-//   });
-
 //initialize routes
 app.use(routes);
 

@@ -2,6 +2,24 @@
 
 const searchURL = "http://localhost:8080/dogparks";
 
+
+function checkUserNav() {
+    window.getCookie = function(name) {
+        var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        if (match) return match[2];
+    }
+    const authToken = window.getCookie('authToken');
+    if (!authToken) {
+        $('#logoutNav').addClass('hidden');
+        $('#AddParkNav').addClass('hidden');
+    } else {
+        $('#loginNav').addClass('hidden');
+        $('#signupNav').addClass('hidden');
+    }
+}
+
+//////// GET ALL DOG PARKS //////////////////////
+
 function getDogparksData() {
     fetch(searchURL)
     .then(response => {
@@ -31,12 +49,11 @@ function displayResults(responseJson) {
         </div>`)};
 }
 
-///////////////////////////////////////////////////////////////////////////////////////
 
+////////////// GET SPECIFIC DOG PARK //////////////////////
 
 function GetID() {
     $('main').on('click', '.more-Info', function (event){
-        //console.log(document.cookie.authToken);
         event.preventDefault();
         var id = $(this).attr('id');
         window.getCookie = function(name) {
@@ -44,8 +61,6 @@ function GetID() {
             if (match) return match[2];
           }
         const authToken = window.getCookie('authToken');
-        //console.log(authToken);
-        //console.log(id);
         fetch(searchURL + '/' + id, {
             method: "GET",
             credentials: 'include',
@@ -68,6 +83,9 @@ function GetID() {
 }
 
 function displayPark(responseJson) {
+    if(responseJson.success !== undefined && responseJson.success == false ) {
+        return window.alert("Please Log In");
+    }
     $('#park-moreInfo').empty('');
     $('#park-moreInfo').append(`
         <div class="parkCard">  
@@ -83,7 +101,10 @@ function displayPark(responseJson) {
             </div>
         </div>`)
     $("#park-info").css('display', 'none');
-    };
+    
+};
+
+///////////// DELETE DOG PARK ////////////////////
 
 function deleteDogPark() {
     $('main').on('click', '.delete', function (event) {
@@ -98,7 +119,7 @@ function deleteDogPark() {
     });
 }
 
-///////////////////////////////////////////////////////////////////////////////////
+////////////// EDIT DOG PARK /////////////////////////
 
 function editDogPark() {
     $('main').on('click', '.edit', function (event) {
@@ -146,8 +167,8 @@ function displayParkEdit(responseJson) {
 };
 
 
-
 function runDogparks() {
+    checkUserNav()
     getDogparksData();
     GetID();
     deleteDogPark();

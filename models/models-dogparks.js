@@ -2,10 +2,9 @@
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-
+const {User} = require('./users');
 
 const dogparksSchema = mongoose.Schema({
-    username: 'String',
     parkName: 'String',
     parkImage: 'String',
     parkCity: 'String',
@@ -14,7 +13,6 @@ const dogparksSchema = mongoose.Schema({
 
 dogparksSchema.methods.serialize = function() {
     return {
-        username: this.userName,
         parkName: this.parkName,
         parkImage: this.parkImage,
         parkCity: this.parkCity,
