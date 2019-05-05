@@ -1,5 +1,5 @@
 'use strict';
-require('dotenv').config();
+require('dotenv').config({path: '.env'});
 const express = require('express');
 var methodOverride = require('method-override');
 const app = express();
