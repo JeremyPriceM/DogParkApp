@@ -1,5 +1,4 @@
 'use strict'
-require('dotenv').config(); 
 
 exports.DATABASE_URL = process.env.DATABASE_URL ||
 "mongodb+srv://my-new-user:Coolguy32@my-first-mlab-db-vmc3g.mongodb.net/dogparksapp?retryWrites=true?";
