@@ -1,5 +1,5 @@
 'use strict';
-require('dotenv').config({path: '.env'});
+require('dotenv').config();
 const express = require('express');
 var methodOverride = require('method-override');
 const app = express();
@@ -29,7 +29,7 @@ let server;
 
 function runServer(DATABASE_URL, port=PORT) {
     return new Promise((resolve, reject) => {
-        mongoose.connect(DATABASE_URL, err => {
+        mongoose.connect(DATABASE_URL, { useNewUrlParser: true }, err => {
             if (err) {
                 return reject(err);
             }
