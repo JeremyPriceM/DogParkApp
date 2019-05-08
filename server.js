@@ -22,6 +22,10 @@ const routes = require('./api/router-dogparks');
 //initialize routes
 app.use(routes);
 
+const DBConfig = {
+    useNewUrlParser: true
+};
+
 //error handling middleware
 // app.use(function(err, req, res, next) {
 //     res.status(422).send({error: err.message});
@@ -31,7 +35,7 @@ let server;
 
 function runServer(DatabaseUrl, port=PORT) {
     return new Promise((resolve, reject) => {
-        mongoose.connect(DatabaseUrl, {useNewUrlParser:true}, err => {
+        mongoose.connect(DatabaseUrl, DBConfig, err => {
             console.log(DatabaseUrl);
             if (err) {
                 return reject(err);
