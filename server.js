@@ -31,7 +31,7 @@ let server;
 
 function runServer(DatabaseUrl, port=PORT) {
     return new Promise((resolve, reject) => {
-        mongoose.connect(DatabaseUrl, {useNewUrlParser:true}, err => {
+        mongoose.connect(DatabaseUrl, err => {
             console.log(DatabaseUrl);
             if (err) {
                 return reject(err);
