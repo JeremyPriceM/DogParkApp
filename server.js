@@ -1,6 +1,8 @@
 'use strict';
 require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 var methodOverride = require('method-override');
 const app = express();
 const bodyParser = require('body-parser');
@@ -10,8 +12,8 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+
+
 
 const {PORT, DATABASE_URL} = require('./config');
 const routes = require('./api/router-dogparks');
@@ -21,9 +23,9 @@ const routes = require('./api/router-dogparks');
 app.use(routes);
 
 //error handling middleware
-app.use(function(err, req, res, next) {
-    res.status(422).send({error: err.message});
-});
+// app.use(function(err, req, res, next) {
+//     res.status(422).send({error: err.message});
+// });
 
 let server;
 
