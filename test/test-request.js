@@ -2,7 +2,7 @@
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const {PORT, DATABASE_URL} = require('./config');
+const {PORT, DATABASE_URL} = require('../config');
 const { closeServer, runServer, app} = require('../server');
 const expect = chai.expect;
 
