@@ -1,7 +1,8 @@
 'use strict';
 
-//const searchURL = "http://localhost:8080/dogparks";
-const searchURL = "https://sleepy-eyrie-80888.herokuapp.com/dogparks";
+const searchURL = "https://thedogparkapp.herokuapp.com/";
+
+////// USER NAV TO SHOW LOGOUT/LOGIN NAVIGATION ///////////////////
 
 function checkUserNav() {
     window.getCookie = function(name) {

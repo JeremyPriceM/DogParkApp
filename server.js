@@ -12,9 +12,6 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-
-
-
 const {PORT, DATABASE_URL} = require('./config');
 const routes = require('./api/router-dogparks');
 
@@ -25,11 +22,6 @@ app.use(routes);
 const DBConfig = {
     useNewUrlParser: true
 };
-
-//error handling middleware
-// app.use(function(err, req, res, next) {
-//     res.status(422).send({error: err.message});
-// });
 
 let server;
 
