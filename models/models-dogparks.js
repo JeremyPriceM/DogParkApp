@@ -2,7 +2,6 @@
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-const {User} = require('./users');
 
 const dogparksSchema = mongoose.Schema({
     parkName: 'String',
