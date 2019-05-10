@@ -1,6 +1,6 @@
 'use strict';
 
-const searchURL = "https://thedogparkapp.herokuapp.com/";
+const searchURL = "https://thedogparkapp.herokuapp.com/dogparks";
 
 ////// USER NAV TO SHOW LOGOUT/LOGIN NAVIGATION ///////////////////
 
