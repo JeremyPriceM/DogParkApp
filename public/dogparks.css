@@ -39,12 +39,17 @@ html {
 
 .parkLoc {
     margin-top: 0;
+    text-align: left;
+}
+
+.more-Info {
+    float: left;
 }
 
 .column {
     float: left;
-    width: 50%;
-    padding: 5px;
+    width: 100%;
+    padding: 10px;
 }
 
 .parkCard {
