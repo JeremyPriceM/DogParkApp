@@ -94,7 +94,7 @@ router.put('/dogparks/:id', checkToken, (req, res, next) => {
     });
 });
 
-router.delete("/dogparks/:id", checkToken, (req, res, next) => {
+router.delete("/dogparks/:id", (req, res, next) => {
     Dogparks.findByIdAndDelete({_id: req.params.id})
     .then(function() {
         res.redirect('/dogparks.html');
