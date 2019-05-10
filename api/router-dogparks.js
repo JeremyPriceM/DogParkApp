@@ -68,7 +68,6 @@ router.get('/dogparks', (req, res, next) => {
 });
 
 router.post("/dogparks", jsonParser, (req, res, next) => {
-    console.log(req);
     Dogparks.create(req.body)
     .then(function(dogpark){
         res.redirect('/dogparks.html');
