@@ -22,21 +22,21 @@
     </header>
     <main role="main">
       <div class="container">
-        <form  method="post" action="/login"  class="formClass" id="signupForm">
+        <form method="post" action="/login" class="formClass" id="signupForm">
           <h1 class="formTitle">Login</h1>
 
           <div class="field">
             <label>User Name</label>
-            <input type="text" name="username" placeholder=""><br />
+            <input id="username" type="username" name="username" placeholder=""><br />
 
             <label>Password</label>
-            <input type="text" name="password" placeholder=""><br />
+            <input id="password" type="password" name="password" placeholder=""><br />
     
             <input type="submit" class="submit" value="Submit">
           </div>
         </form>
       </div>
-      <div id="error-message"></div>
+      <div id="js-error-message"></div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="index.js"></script>

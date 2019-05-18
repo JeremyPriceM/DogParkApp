@@ -10,11 +10,13 @@
     <header>
       <nav class="nav" role="navigation">
         <ul>
-          <li class="home"><a href="index.html">The Dog Park</a></li>
-          <li><a href="">Login</a></li>
-          <li><a href="">Sign Up</a></li>
-          </ul>
-      </nav>
+            <li class="home"><a href="index.html">The Dog Park</a></li>
+            <li id="loginNav"><a href="login.html">Login</a></li>
+            <li id="signupNav"><a href="signup.html">Sign Up</a></li>
+            <li id="logoutNav"><a href="/logout">Logout</a></li>
+            <li id="AddParkNav"><a href="newdogparks.html">Add New Dog Park</a></li>
+        </ul>
+    </nav>
     </header>
     <main>
       <div class="container">
@@ -38,9 +40,9 @@
           </div>
         </form>
       </div>
-      <div id="error-message"></div>
+      <div id="js-error-message"></div>
     </main>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="index.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="newdogparks.js"></script>
   </body>
 </html>

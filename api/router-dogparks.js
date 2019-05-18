@@ -34,16 +34,17 @@ router.get('/login', (req,res) => {
     res.sendFile('/public/login.html');
 });
 
-router.post('/login', localAuth, (req, res) => {
+router.post('/login', localAuth, (req, res, next) => {
     const authToken = createAuthToken(req.user.serialize());
     res.cookie('authToken', authToken);
     res.redirect("/dogparks.html");
 });
 
 router.get('/logout', (req, res) => {
-    req.logout();
+    req.logOut();
     res.clearCookie('authToken');
     res.redirect('index.html');
+    
 });
 
 // The user exchanges a valid JWT for a new one with a later expiration
@@ -68,6 +69,7 @@ router.get('/dogparks', (req, res, next) => {
 });
 
 router.post("/dogparks", jsonParser, (req, res, next) => {
+    
     Dogparks.create(req.body)
     .then(function(dogpark){
         res.redirect('/dogparks.html');
@@ -86,8 +88,8 @@ router.get("/dogparks/:id", jsonParser, checkToken, (req, res, next) => {
     })
 });
 
-router.put('/dogparks/:id', checkToken, (req, res, next) => {
-    Dogparks.findByIdAndUpdate({_id: req.params.id}, req.body)
+router.put('/dogparks/:id', (req, res, next) => {
+    Dogparks.findOneAndUpdate({_id: req.params.id}, req.body)
     .then(function() {
             res.redirect('/dogparks.html');
     });
@@ -109,7 +111,6 @@ router.get('/signup', (req, res) => {
 router.post('/signup', jsonParser, (req, res) => {
     const requiredFields = ['username', 'password'];
     const missingField = requiredFields.find(field => !(field in req.body));
-
     if (missingField) {
         return res.status(422).json({
           code: 422,
@@ -171,7 +172,7 @@ router.post('/signup', jsonParser, (req, res) => {
             code: 422,
             reason: 'ValidationError',
             message: tooSmallField
-            ? `Must be at least ${sizedFields[tooSmallField]
+            ? `Password must be at least ${sizedFields[tooSmallField]
             .min} characters long`
             : `Must be at most ${sizedFields[tooLargeField]
             .max} characters long`,
@@ -180,9 +181,8 @@ router.post('/signup', jsonParser, (req, res) => {
     }
 
     let {username, password} = req.body;
-
     return User.find({username})
-        .count()
+        .countDocuments()
         .then(count => {
             if (count > 0) {
                 return Promise.reject({
@@ -190,7 +190,7 @@ router.post('/signup', jsonParser, (req, res) => {
                     reason: 'ValidationError',
                     message: 'Username already taken',
                     location: 'username'
-                });
+                 });
             }
             return User.hashPassword(password);
         })
@@ -201,7 +201,9 @@ router.post('/signup', jsonParser, (req, res) => {
             });
         })
         .then(user => {
-            return res.status(201).json(user.serialize());
+            const authToken = createAuthToken(user.serialize());
+            res.cookie('authToken', authToken);
+            res.redirect("/dogparks.html");
         })
         .catch(err => {
             if (err.reason === 'ValidationError') {

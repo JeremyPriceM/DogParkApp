@@ -111,12 +111,17 @@ function deleteDogPark() {
     $('main').on('click', '.delete', function (event) {
         event.preventDefault();
         var id = $(this).attr('id');
-        fetch(searchURL + '/' + id, {
-            method: "Delete"
-        })
-        .then(function() {
-            location.reload();
-        })
+        var getConfirm = confirm("Do you want to delete the dogpark?");
+        if(getConfirm == true) {
+            fetch(searchURL + '/' + id, {
+                method: "Delete"
+            })
+            .then(function() {
+                location.reload();
+            })
+        } else {
+            return false;
+        }
     });
 }
 
@@ -126,7 +131,19 @@ function editDogPark() {
     $('main').on('click', '.edit', function (event) {
         event.preventDefault();
         var id = $(this).attr('id');
-        fetch(searchURL + '/' + id) 
+        window.getCookie = function(name) {
+            var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            if (match) return match[2];
+          }
+        const authToken = window.getCookie('authToken');
+        fetch(searchURL + '/' + id, {
+            method: "GET",
+            credentials: 'include',
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': authToken
+            }
+        })
         .then(response => {
             if (response.ok) {
                 return response.json();
