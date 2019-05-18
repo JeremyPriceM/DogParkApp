@@ -3,7 +3,7 @@ function getError() {
         event.preventDefault();
         let username = $('#username')[0].value;
         let password = $('#password')[0].value;
-        let url = "https://thedogparkapp.herokuapp.com/dogparks/signup"
+        let url = "https://thedogparkapp.herokuapp.com/dogparks/signup/"
         fetch(url,
             {
                method: 'POST',
